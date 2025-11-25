@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie | Panel Ucznia</title>
+    <link rel="stylesheet" href="css/style.css">
+	<style>.main:{ justify-content: center;}</style>
+</head>
+
+<body class="login-background">
+
+<header>
+	<div>
+    <h1>Panel Ucznia - logowanie<img src="img/logo.png" alt="Logo" class="logo" width="80" height="80" style="float: right"></h1>
+	
+	</div>
+    <!-- Dwupoziomowe menu -->
+    <nav>
+        <ul class="menu">
+            
+            <li>Funckje główne
+                <ul class="submenu">
+					<li><a href="index.html	">Strona główna</a></li>
+					<li><a href="login.html"><strong>Logowanie</strong></a></li>
+					
+                </ul>
+            </li>
+            <li>Funckje użytkownika
+                <ul class="submenu">
+				<!--<li><a href="homework.html">Lista zadań</a></li>-->
+                <li><a href="schedule.html">Otwórz plan zajęć</a></li>
+                <li class="menu-lektor" style="display:none;"><a href="admin.html">Użytkownicy</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main class="login-container">
+    <section class="login-box">
+        <h2>Zaloguj się</h2>
+
+        <form id="loginForm">
+            <label for="login">Login:</label>
+            <input type="login" id="login" required placeholder="np. jan.kowalski">
+
+            <label for="password">Hasło:</label>
+            <input type="password" id="password" required placeholder="Wpisz hasło">
+
+            <button type="submit">Zaloguj</button>
+        </form>
+
+        <p class="login-info">Nie masz konta? &nbsp;<a href="index.html">Skontaktuj się z recepcją.</a></p>
+    </section>
+</main>
+
+<footer>
+    <p>© 2024 Panel ucznia</p>
+</footer>
+
+<script src="js/login.js" type="module"></script>
+<script>document.addEventListener('DOMContentLoaded', async () => {
+	
+    const token = localStorage.getItem("jwt");
+    // Użytkownik nie zalogowany → nic nie robimy
+    if (!token) return;
+	
+    try {
+        const response = await fetch('https://studentpanel-sw-dm.onrender.com/api/auth/me', {
+            headers: { 'Authorization':`Bearer ${token.trim()}`}
+        });
+		
+        if (!response.ok) return;
+
+        const user = await response.json();
+		console.log(user)
+        if (user.type === 'lektor') {
+			
+            document.querySelectorAll('.menu-lektor')
+                    .forEach(el => el.style.display = 'block');
+        }
+
+    } catch (e) {
+        console.log("Błąd pobierania roli:", e);
+    }
+});
+</script>
+</body>
+</html>

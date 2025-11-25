@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Plan zajęć</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+	<div>
+    <h1>Twój plan zajęć<img src="img/logo.png" alt="Logo" class="logo" width="80" height="80" style="float: right"></h1>
+	
+	</div>
+    <!-- Dwupoziomowe menu -->
+    <nav>
+        <ul class="menu">
+            
+            <li>Funckje główne
+                <ul class="submenu">
+					<li><a href="index.html	">Strona główna</a></li>
+					<li><a href="login.html">Logowanie</a></li>
+					
+                </ul>
+            </li>
+            <li>Funckje użytkownika
+                <ul class="submenu">
+				<!--<li><a href="homework.html">Lista zadań</a></li>-->
+                <li><a href="schedule.html"><strong>Otwórz plan zajęć</strong></a></li>
+                <li class="menu-lektor" style="display:none;"><a href="admin.html">Użytkownicy</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<div id="lessonModal" class="modal hidden">
+    <div class="modal-content">
+        <span id="closeModal">&times;</span>
+        <div id="modalText"></div>
+		<div id="modalActions" style="display:none; margin-top: 20px;">
+            <button id="editLessonBtn">Edytuj</button>
+            <button id="deleteLessonBtn" style="margin-left: 10px;">Usuń</button>
+        </div>
+    </div>
+</div>
+
+
+
+<label for="yearSelect">Wybierz rok szkolny:</label>
+<select id="yearSelect">
+    <option value="">Ładowanie...</option>
+</select>
+
+<label for="weekPicker">Wybierz tydzień: </label>
+<input type="week" id="weekPicker">
+<button id="loadSchedule">Pokaż plan</button>
+<button id="addLessonBtn" style="display:none;">Dodaj lekcję</button>
+
+<h3 id="weekTitle"></h3>
+<h3 id="weekTitle"></h3>
+
+<div class="schedule-container">
+  <div class="time-labels"></div>
+  <div class="schedule-main">
+    <div class="days-row">
+      <div>Pon</div><div>Wt</div><div>Śr</div><div>Cz</div><div>Pt</div>
+    </div>
+    <div id="scheduleGrid" class="schedule-grid"></div>
+  </div>
+</div>
+
+<script type="module" src="js/schedule.js"></script>
+<script> //checklogin status
+document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("jwt");
+
+    if (!token) {
+        alert("Aby uzyskać dostęp do tej funkcji, musisz się zalogować.");
+        window.location.href = "login.html";
+    }
+});
+
+let isLektor = false;
+
+async function checkRole() {
+    const token = localStorage.getItem("jwt");
+    if (!token) return;
+
+    try {
+        const resp = await fetch("https://studentpanel-sw-dm.onrender.com/api/auth/me", {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        if (!resp.ok) return;
+
+        const user = await resp.json();
+        isLektor = (user.type === "lektor");
+		const addLessonBtn = document.getElementById("addLessonBtn");
+		if (user.type === 'lektor') {
+			addLessonBtn.style.display = "inline-block";
+            document.querySelectorAll('.menu-lektor')
+                    .forEach(el => el.style.display = 'block');
+        }
+		
+    } catch (e) {
+        console.error("Błąd roli:", e);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    checkRole();
+});
+
+</script>
+</body>
+</html>

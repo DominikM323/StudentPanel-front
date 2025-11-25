@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel Admina</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+    <div>
+        <h1>Panel Admina<img src="img/logo.png" alt="Logo" class="logo" width="80" height="80" style="float: right"></h1>
+    </div>
+     <nav>
+        <ul class="menu">
+            
+            <li>Funckje główne
+                <ul class="submenu">
+					<li><a href="index.html	">Strona główna</a></li>
+					<li><a href="login.html">Logowanie</a></li>
+					
+                </ul>
+            </li>
+            <li>Funckje użytkownika
+                <ul class="submenu">
+				<!--<li><a href="homework.html">Lista zadań</a></li>-->
+                <li><a href="schedule.html">Otwórz plan zajęć</a></li>
+                <li class="menu-lektor" style="display:none;"><a href="admin.html"><strong>Użytkownicy</strong></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main class="admin-main">
+	<div  style="grid-column: 1 / -1;">
+    <h2>Panel Admina – zarządzanie kontami</h2>
+	
+        <button id="addLectorBtn" class="login-box-button">Dodaj lektora</button>
+    
+	</div>
+    <!-- Zakładki -->
+    <!--<nav style="margin-bottom:20px;">
+        <button class="tab-btn" data-tab="lectors">Lektorzy</button>
+        <button class="tab-btn" data-tab="studentLogins">Loginy uczniów</button>
+    </nav>-->
+	
+    <!-- Lektorzy -->
+    <section id="lectors" class="tab-content">
+        <!--<button id="addLectorBtn" class="login-box-button">Dodaj lektora</button>-->
+        <div class="admin-table-wrapper">
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Adres</th>
+                <th>Telefon</th>
+                <th>Umowa od</th>
+                <th>Umowa do</th>
+                <th>Login</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody id="lectorsTable"></tbody>
+    </table>
+	
+</div>
+    </section>
+
+    <!-- Loginy uczniów -->
+    <section id="studentLogins" class="tab-content hidden">
+        <div class="admin-table-wrapper">
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Login</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody id="studentLoginsTable"></tbody>
+    </table>
+</div>
+    </section>
+</main>
+
+<!-- Modal do dodawania/edycji -->
+<div id="modal" class="modal hidden">
+    <div class="modal-content">
+        <span id="closeModal">&times;</span>
+        <h3 id="modalTitle"></h3>
+        <form id="modalForm">
+            <label>Imię</label>
+            <input type="text" id="inputFirstName" required>
+            <label>Nazwisko</label>
+            <input type="text" id="inputLastName" required>
+            <label>Adres</label>
+            <input type="text" id="inputAddress">
+            <label>Telefon</label>
+            <input type="text" id="inputPhone">
+			<label>Umowa od</label>
+			<input type="date" id="inputUmowaOd">
+
+			<label>Umowa do</label>
+			<input type="date" id="inputUmowaDo">
+            <label>Login</label>
+            <input type="text" id="inputLogin" required>
+			<label class="password-field">Hasło</label>
+			<input type="password" id="inputPassword" class="password-field"><!-- tylko w dodawaniu -->
+			
+			
+            <button type="submit" class="login-box-button">Zapisz</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 Panel Admina</p>
+</footer>
+
+<script src="js/admin.js" type="module"></script>
+<script>
+// Zakładki
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+        document.getElementById(btn.dataset.tab).classList.remove('hidden');
+    });
+});
+
+// Modal
+const modal = document.getElementById('modal');
+const closeModal = document.getElementById('closeModal');
+closeModal.onclick = () => modal.classList.add('hidden');
+
+// przycisk dodaj lektora
+document.getElementById('addLectorBtn').addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    document.getElementById('modalTitle').textContent = 'Dodaj nowego lektora';
+    document.getElementById('modalForm').reset();
+	 document.querySelectorAll('.password-field').forEach(el => el.style.display = 'block');
+});
+
+
+
+</script>
+
+</body>
+</html>

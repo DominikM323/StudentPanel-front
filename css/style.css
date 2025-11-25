@@ -1,0 +1,473 @@
+/* zmiana sposobu wyświetlania */
+.menu li {
+    display: inline-block;
+}
+
+/* responsywne obrazy */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+header, footer {
+    background: #4466aa;
+    color: white;
+    padding: 20px;
+}
+
+body {
+    background: linear-gradient(135deg, #4ea5df, #1cc88a);
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* layout */
+main {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 20px;
+	 margin-left: 20px;
+}
+
+.task-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.task {
+    background: #f2f2f2;
+    padding: 10px;
+    width: 30%;
+	cursor: pointer;
+    transition: background 0.2s;
+}
+
+/* Ukrywanie elementów JS */
+.hidden {
+    display: none;
+}
+
+/* RWD — trzy progi */
+@media (max-width: 1200px) {
+    main {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+    .task {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul li {
+        display: block;
+    }
+}
+
+/*LOGIN*/
+
+
+
+.login-background {
+    background: linear-gradient(135deg, #4ea5df, #1cc88a);
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+	
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px 40px;
+    border-radius: 15px;
+    max-width: 380px;
+    width: 100%;
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+.login-box-button {
+    display: inline-block;
+    margin-bottom: 10px; /* odstęp między przyciskiem a tabelą */
+}
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.login-box label {
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 20px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 12px;
+    background: #4e73df;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s;
+	display: inline-block;
+}
+
+.login-box button:hover {
+    background: #3454c0;
+}
+
+
+.login-info {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-info a {
+    color: #4e73df;
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        padding: 20px;
+    }
+}
+
+.file-panel {
+    background: #eef5ff;
+    border: 1px solid #aac;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.task {
+    cursor: pointer;
+    transition: background 0.2s;
+}
+/* PLAN ZAJEC */
+
+.schedule-main {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto; /* zajmuje pozostałą szerokość */
+}
+
+.schedule-grid {
+    position: relative;
+    width: 100%;
+    height: 1120px; /* np. 24h * 40px = 960px */
+    border: 1px solid #ccc;
+    margin-top: 30px;
+	
+}
+
+.schedule-grid::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, #eee 1px, transparent 1px);
+    background-size: 100% 80px; /* 80px = 1 godzina */
+    z-index: 0;
+}
+
+.lesson-block {
+    position: absolute;
+    background-color: #20a103;
+    color: white;
+    border-radius: 4px;
+    font-size: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: pre-line;
+    z-index: 1; 
+	padding: 4px 6px;
+	
+	}
+
+.lesson-block:hover {
+    background-color: #2acc06;  /* jaśniejsze tło po najechaniu */
+    cursor: pointer;            /* zmienia kursor na wskazujący */
+    transform: scale(1.01);     /* lekko powiększa blok */
+}
+
+.schedule-container {
+    display: flex;
+}
+
+.time-labels {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+	margin-top: 40px;
+}
+
+.time-labels div {
+    height: 80px; /* slotHeight * 4 = godzina */
+    text-align: right;
+    padding-right: 5px;
+    font-size: 18px;
+    color: #333;
+}
+
+.days-row {
+    display: flex;
+}
+
+.days-row div {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+
+.modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px 40px;   /* większe przerwy wokół treści */
+    border-radius: 10px;
+    max-width: 400px;     /* większa szerokość */
+    width: 90%;           /* elastyczna szerokość w procentach */
+    max-height: 80%;      /* ograniczenie maksymalnej wysokości */
+    overflow-y: auto;     /* scroll, jeśli treść za długa */
+    line-height: 1.6;     /* większy odstęp między liniami */
+    font-size: 16px;      /* większy tekst dla lepszej czytelności */
+}
+
+.hidden { display: none; }
+
+#closeModal {
+    float: right;
+    cursor: pointer;
+    font-size: 28px;   
+    font-weight: bold;  
+}
+
+.menu a {
+    color: white;             /* kolor tekstu linków */
+    text-decoration: none;    /* usuwa podkreślenie */
+    padding: 5px 10px;        /* odstęp wokół linku */
+    display: inline-block;    /* pozwala na padding */
+    transition: color 0.2s;   /* efekt płynnej zmiany koloru */
+}
+
+/* Linki po najechaniu myszką */
+.menu a:hover {
+    color: #ffdd57;           /* np. jasny żółty */
+    background: rgba(255,255,255,0.1); /* delikatne podświetlenie */
+    border-radius: 4px;
+}
+
+/* Podmenu */
+.submenu a {
+    color: #fff;   	/* też biały lub inny kontrastowy */
+	display: block;       /* wypełnia cały element li */
+    padding: 2px 22px;    /* zwiększa odstęp wewnątrz linku */
+}
+
+.submenu a:hover {
+    color: #ffdd57;
+    background: rgba(255,255,255,0.1);
+}
+.submenu li {
+    margins: 10px;  /* zwiększa odstęp między elementami */
+}
+
+.menu li {
+	 margin-right: 40px;
+    position: relative; /* konieczne, żeby submenu było pozycjonowane względem li */
+}
+
+.submenu {
+    position: absolute;
+    top: 100%;   /* tuż pod li */
+    left: 0;     /* wyrównanie lewej krawędzi do li */
+    margin: 0;   /* usuwa domyślny margin */
+    padding: 0;  /* usuwa domyślny padding */
+    list-style: none;
+    display: none; /* ukryte domyślnie */
+	background: #5774ad
+	
+}
+
+.menu li:hover > .submenu {
+    display: block; /* pokaż po najechaniu */
+}
+
+.submenu li a {
+    display: block;
+    padding: 8px 12px;
+    text-align: left;  /* wyrównanie do lewej */
+	background: #5774ad
+}
+
+.modal-content form label {
+    display: block;      /* etykieta na osobnej linii */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.modal-content form input {
+    display: block;      /* input pod label */
+    width: 100%;
+    padding: 10px;
+    margin: 0 0 20px 0;  /* odstęp poniżej */
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/*ADMIN CONSOLE*/
+
+.admin-table-wrapper {
+    background: rgba(255,255,255,0.9);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    margin-top: 20px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.admin-table th {
+    background: #4466aa;     /* kolor nagłówka jak inne panele */
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.admin-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-table tr:nth-child(even) {
+    background: #f4f7ff;     /* jasne naprzemienne tło */
+}
+
+.admin-table tr:hover {
+    background: #e6f3ff;     /* delikatny hover */
+}
+
+.action-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.edit-btn {
+    background: #4e73df;
+    color: white;
+}
+
+.edit-btn:hover {
+    background: #3454c0;
+}
+
+.delete-btn {
+    background: #e74a3b;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #c0392b;
+}
+
+.reset-pass-btn {
+    background: #e3ed28;
+}
+
+.reset-pass-btn:hover {
+    background: #c6cf34;
+}
+
+.password-field {
+    display: none;
+}
+
+.info-box {
+    background: #f0f7ff;
+    border-left: 5px solid #d42f73;
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.tip-box {
+    background: #fff8e1;
+    border-left: 5px solid #ffb300;
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.tip-box h3,
+.info-box h3 {
+    margin-top: 0;
+}
+
+.school-image {
+    position: absolute;
+    right: 30px;
+    top: 100px;
+    width: 500px;      /* lub większy */
+    opacity: 0.9;      /* opcjonalnie */
+    pointer-events: none; /* żeby nie blokował kliknięć */
+	}
+@media (max-width: 1100px) {
+    .school-image {
+        display: none;
+    }
+}

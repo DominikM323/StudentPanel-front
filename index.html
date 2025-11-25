@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel ucznia</title>
+    <link rel="stylesheet" href="css/style.css">
+	
+</head>
+
+<body>
+<header>
+	<div>
+    <h1>Panel Ucznia<img src="img/logo.png" alt="Logo" class="logo" width="80" height="80" style="float: right"></h1>
+	
+	</div>
+    <!-- Dwupoziomowe menu -->
+    <nav>
+        <ul class="menu">
+            
+            <li>Funckje główne
+                <ul class="submenu">
+					<li><a href="index.html	"><strong>Strona główna</strong></a></li>
+					<li><a href="login.html">Logowanie</a></li>
+					
+                </ul>
+            </li>
+            <li>Funckje użytkownika
+                <ul class="submenu">
+				<!--<li><a href="homework.html">Lista zadań</a></li>-->
+                <li><a href="schedule.html">Otwórz plan zajęć</a></li>
+                <li class="menu-lektor" style="display:none;"><a href="admin.html">Użytkownicy</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <!-- Sekcja tekstowa-->
+    <section>
+        <h2>Witaj w panelu ucznia!</h2>
+
+        <p id="welcomeMessage"></p>
+        <p><em>Aby zapisać się na zajęcia, skontaktuj się z recepcją: +48 123456.</em></p>
+        <p><mark>lub napisz e-mail na adres: testemail@idontexist.com.</mark></p>
+        <p><u>recepcja dostępna pn-pt w godzinach 8:00-17:00</u></p>
+        <p><small>Miłego dnia!</small></p>
+
+        <section class="info-box">
+    <h3>Do końca roku szkolnego pozostało:</h3>
+    <h2 id="daysLeft"></h2>
+</section>
+
+<script>
+const endDate = new Date("2026-06-30");
+const now = new Date();
+const diff = Math.ceil((endDate - now) / (1000 * 60 * 60 * 24));
+document.getElementById("daysLeft").textContent = diff + " dni";
+</script>
+
+<section class="tip-box">
+    <h3>Porada dnia</h3>
+    <p id="dailyTip"></p>
+</section>
+
+<script>
+const tips = [
+    "Ucz się 15 minut dziennie zamiast długo raz na tydzień.",
+    "Rób notatki – to poprawia zapamiętywanie.",
+    "Zadawaj pytania, nawet jeśli wydają się proste.",
+    "Powtarzaj materiał krótko, ale regularnie.",
+    "Używaj fiszek, by szybciej zapamiętywać.",
+	"Nie ucz się na pamięć — staraj się zrozumieć."
+];
+document.getElementById("dailyTip").textContent =
+    tips[Math.floor(Math.random() * tips.length)];
+</script>
+<img src="img/school.png" alt="Szkoła" class="school-image">
+	
+        
+    </section>
+
+    <!-- element JS: ukrywana sekcja -->
+    <section id="uploadSection" class="hidden">
+        <h3>Wyślij rozwiązanie</h3>
+        <input type="file">
+        <button>Wyślij</button>
+    </section>
+
+</main>
+
+<footer>
+    <p>© 2024 Panel Ucznia</p>
+</footer>
+
+<script src="js/main.js" type="module"></script>
+</body>
+</html>
