@@ -271,6 +271,7 @@ document.getElementById("editLessonBtn").addEventListener("click", async () => {
             body: JSON.stringify(updatedLesson)
         });
 		loadSchedule()
+		modal.classList.add("hidden");
         //location.reload();
     };
 });
