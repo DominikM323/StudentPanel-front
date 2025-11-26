@@ -22,7 +22,7 @@
                 <ul class="submenu">
 					<li><a href="index.html	"><strong>Strona główna</strong></a></li>
 					<li><a href="login.html">Logowanie</a></li>
-					
+					<li class="logout"><a id="logoutBtn">Wyloguj</a></li>
                 </ul>
             </li>
             <li>Funkcje użytkownika
@@ -76,6 +76,14 @@ const tips = [
 ];
 document.getElementById("dailyTip").textContent =
     tips[Math.floor(Math.random() * tips.length)];
+	
+
+</script>
+<script>
+document.getElementById('logoutBtn').addEventListener('click', function () {
+    localStorage.removeItem('jwt');
+    window.location.href = '/login.html';
+});
 </script>
 <img src="img/school.png" alt="Szkoła" class="school-image">
 	
